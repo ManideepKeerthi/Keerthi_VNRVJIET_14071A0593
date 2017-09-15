@@ -1,6 +1,6 @@
 import java.util.Date;
 import java.util.*;
-import java.IllegalArgumentException;
+import java.lang.IllegalArgumentException;
 
 /**
  * A fix-sized array of students
@@ -19,7 +19,7 @@ public class StudentGroup implements StudentArrayOperation {
 		
 	/**
 	 * DO NOT remove or change this constructor, it will be used during task check
-	 * @param length
+	 * /@param length
 	 */
 	public StudentGroup(int length) {
 		this.students = new Student[length];
@@ -33,16 +33,17 @@ public class StudentGroup implements StudentArrayOperation {
 	}
 
 	@Override
-	public void setStudents(Student[] students) {
+	public void setStudents(Student[] students)throws IllegalArgumentException {
 		// Add your implementation here
-		int id,c=1;
+		int id,year,month,day,c=1;
 		String name;
+		Date dob;
 		double mark;
 		Scanner s=new Scanner(System.in);
 		try{
 			
-			if(students.length==null)
-				throw IllegalArgumentException;
+			if(students==null)
+				throw new IllegalArgumentException();
 			else
 			{
 				for(int i=0;i<students.length;i++)
@@ -51,22 +52,27 @@ public class StudentGroup implements StudentArrayOperation {
 					id=s.nextInt();
 					name=s.next();
 					mark=s.nextDouble();
-					Date dob[i]= new Date(1997,if(c==12){c=1;}(c++)%12,(c++)%31);
-					students[i]=new Student(id,name,dob[i],mark);
+					year=s.nextInt();
+					month=s.nextInt();
+					day=s.nextInt();
+					dob = new Date(year,month,day);
+					students[i] = new Student(id,name,dob,mark);
 				}
 
 			}
 		}
+		finally{}
 		
       }
 
 	@Override
-	public Student getStudent(int index) {
+	public Student getStudent(int index)throws IllegalArgumentException {
 		// Add your implementation here
 		try{
 		if(index<0||index>=students.length)
-			throw IllegalArgumentException;
+			throw new IllegalArgumentException();
 		}
+		finally{}
 		return students[index];
 		
 	}
@@ -76,71 +82,75 @@ public class StudentGroup implements StudentArrayOperation {
 		// Add your implementation here
 		try{
 		if(index<0||index>=students.length||student==null)
-			throw IllegalArgumentException;
+			throw new IllegalArgumentException();
 		else{
-			students[index].id=student.id;
-			students[index].fullname=student.fullname;
-			students[index].birthDate=student.birthDate;
-			students[index].avgMark=student.avgMark;
+			students[index].setId(student.getId());
+			students[index].setFullName(student.getFullName());
+			students[index].setBirthDate(student.getBirthDate());
+			students[index].setAvgMark(student.getAvgMark());
 
 		}
 		}
-		
+		finally{}
 	}
 
 	@Override
-	public void addFirst(Student student) {
+	public void addFirst(Student student)throws IllegalArgumentException {
 		// Add your implementation here
 		try{
 		if(student==null)
-			throw IllegalArgumentException;
+			throw new IllegalArgumentException();
 		else{
 		students=Arrays.copyOf(students,students.length+1);
-			for(i=students.length-2;i>=0;i++)
+			for(int i=students.length-2;i>=0;i++)
 			{
 				students[i+1]=students[i];
 			}
-			students[0]=new Student(student.id,student.fullname,student.birthDate,student.avgMark);
+			students[0]=new Student(student.getId(),student.getFullName(),student.getBirthDate(),student.getAvgMark());
 	    }
-      }  
+      }
+      finally{}  
 	}
 
 	@Override
-	public void addLast(Student student) {
+	public void addLast(Student student)throws IllegalArgumentException {
 		// Add your implementation here
 		try{
 		if(student==null)
-			throw IllegalArgumentException;
+			throw new IllegalArgumentException();
 		else{
 			students=Arrays.copyOf(students,students.length+1);
-			students[students.length-1]=new Student(student.id,student.fullname,student.birthDate,student.avgMark);
+			students[students.length-1]=new Student(student.getId(),student.getFullName(),student.getBirthDate(),student.getAvgMark());
 			
 		}
 		}
+		finally{}
 
 	}
 
 	@Override
-	public void add(Student student, int index) {
+	public void add(Student student, int index)throws IllegalArgumentException {
 		// Add your implementation here
 		try{
 		if(index<0||index>=students.length||student==null)
-			throw IllegalArgumentException;
+			throw new IllegalArgumentException();
 		else{
 			students=Arrays.copyOf(students,students.length+1);
-			for(i=students.length-2;i>=index;i++)
+			for(int i=students.length-2;i>=index;i++)
 			{
 				students[i+1]=students[i];
 			}
-			students[index]=new Student(student.id,student.fullname,student.birthDate,student.avgMark);
+			students[index]=new Student(student.getId(),student.getFullName(),student.getBirthDate(),student.getAvgMark());
 			
 		}
 		}
+		finally{}
 	}
 
 	@Override
 	public void remove(int index) {
 		// Add your implementation here
+
 
 	}
 
