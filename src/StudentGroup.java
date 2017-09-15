@@ -19,7 +19,7 @@ public class StudentGroup implements StudentArrayOperation {
 		
 	/**
 	 * DO NOT remove or change this constructor, it will be used during task check
-	 * /@param length
+	 * @param length
 	 */
 	public StudentGroup(int length) {
 		this.students = new Student[length];
