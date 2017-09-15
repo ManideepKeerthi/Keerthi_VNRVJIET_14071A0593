@@ -95,7 +95,12 @@ public class StudentGroup implements StudentArrayOperation {
 		if(student==null)
 			throw IllegalArgumentException;
 		else{
-		s.add(0,student);
+		students=Arrays.copyOf(students,students.length+1);
+			for(i=students.length-2;i>=0;i++)
+			{
+				students[i+1]=students[i];
+			}
+			students[0]=new Student(student.id,student.fullname,student.birthDate,student.avgMark);
 	    }
       }  
 	}
@@ -122,7 +127,11 @@ public class StudentGroup implements StudentArrayOperation {
 		if(index<0||index>=students.length||student==null)
 			throw IllegalArgumentException;
 		else{
-			
+			students=Arrays.copyOf(students,students.length+1);
+			for(i=students.length-2;i>=index;i++)
+			{
+				students[i+1]=students[i];
+			}
 			students[index]=new Student(student.id,student.fullname,student.birthDate,student.avgMark);
 			
 		}
